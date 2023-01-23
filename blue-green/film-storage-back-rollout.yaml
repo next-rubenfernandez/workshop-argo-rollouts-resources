@@ -12,6 +12,9 @@ spec:
     blueGreen:
       activeService: <SERVICE_ONLINE>
       autoPromotionEnabled: false
+      prePromotionAnalysis:
+        templates:
+          - templateName: dstrategies-back-analysis-template
       previewService: <SERVICE_OFFLINE>
   template:
     metadata:
