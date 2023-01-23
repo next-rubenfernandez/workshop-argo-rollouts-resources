@@ -1,0 +1,39 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: film-storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: film-storage
+  strategy:
+    blueGreen:
+      activeService: <SERVICE_ONLINE>
+      autoPromotionEnabled: false
+      previewService: <SERVICE_OFFLINE>
+  template:
+    metadata:
+      labels:
+        app: film-storage
+    spec:
+      containers:
+        - name: film-storage
+          image: quay.io/dborrego/film-storage:0.2
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/health
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/health
+              port: 8080
+              scheme: HTTP
