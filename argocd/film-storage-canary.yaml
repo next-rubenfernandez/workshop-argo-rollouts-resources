@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: film-storage-canary
+  namespace: <OCP_USER>-gitops-argocd
+spec:
+  destination:
+    namespace: <OCP_USER>-canary
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: canary
+    repoURL: https://github.com/<GITHUB_USER>/workshop-argo-rollouts-resources
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

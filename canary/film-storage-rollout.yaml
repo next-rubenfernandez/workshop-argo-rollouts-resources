@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: film-storage
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: film-storage
+  strategy:
+    canary:
+      analysis:
+        startingStep: 1
+        templates:
+        - templateName: film-storage-analysis-template
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: <TIME>
+      - setWeight: 50
+      - pause:
+          duration: <TIME>
+  template:
+    metadata:
+      labels:
+        app: film-storage
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: film-storage-configmap-env-base
+          image: quay.io/dborrego/film-storage:0.2
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/health
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/health
+              port: 8080
+              scheme: HTTP

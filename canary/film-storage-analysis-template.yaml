@@ -3,14 +3,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   labels:
-    app: dstrategies-back
-  name: dstrategies-back-analysis-template
+    app: film-storage
+  name: film-storage-analysis-template
 spec:
   metrics:
-    - name: dstrategies-back-webmetric
+    - name: film-storage-webmetric
       provider:
         web:
           jsonPath: '{$.status}'
           url: >-
-            http://dstrategies-back-online.<USERNAME>-canary.svc.cluster.local:8080/q/health/ready
+            http://film-storage-online.<USERNAME>-canary.svc.cluster.local:8080/q/health/ready
       successCondition: result == 'UP'
