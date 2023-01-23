@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: film-storage
+  name: film-storage-blue-green
 spec:
   replicas: 1
   selector:
