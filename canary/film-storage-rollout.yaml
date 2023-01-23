@@ -27,9 +27,7 @@ spec:
         app: film-storage
     spec:
       containers:
-        - envFrom:
-            - configMapRef:
-                name: film-storage-configmap-env-base
+        - name: film-storage
           image: quay.io/dborrego/film-storage:0.2
           imagePullPolicy: Always
           ports:
