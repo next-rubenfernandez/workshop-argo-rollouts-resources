@@ -10,12 +10,12 @@ spec:
       app: film-storage
   strategy:
     blueGreen:
-      activeService: <SERVICE_ONLINE>
+      activeService: film-storage-online
       autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
           - templateName: film-storage-analysis-template
-      previewService: <SERVICE_OFFLINE>
+      previewService: film-storage-offline
   template:
     metadata:
       labels:
