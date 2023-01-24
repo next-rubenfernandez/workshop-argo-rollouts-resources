@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: film-storage
-          image: quay.io/dborrego/film-storage:0.2
+          image: quay.io/dborrego/film-storage:0.3
           imagePullPolicy: Always
           ports:
             - name: http
