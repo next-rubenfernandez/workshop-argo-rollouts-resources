@@ -11,6 +11,9 @@ spec:
     path: rhsm-canary
     repoURL: https://github.com/<GITHUB_USER>/workshop-argo-rollouts-resources
     targetRevision: HEAD
+    helm:
+      valueFiles:
+        - edit.values.yaml
   project: default
   syncPolicy:
     automated:
