@@ -11,5 +11,5 @@ spec:
       web:
         jsonPath: '{$.status}'
         url: >-
-          http://{{ include "service.name" . }}.{{ .Values.user }}-blue-green.svc.cluster.local/api/v1/health
+          http://{{ include "service.name" . }}.{{ .Release.Namespace }}.svc.cluster.local/api/v1/health
     successCondition: result == 'UP'
