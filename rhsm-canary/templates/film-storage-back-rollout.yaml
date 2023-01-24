@@ -20,35 +20,22 @@ spec:
       containers:
         - name: {{ include "service.name" . }}
           image: "{{ .Values.service.image.repository }}:{{ .Values.service.image.version }}"
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
-          envFrom:
-          - configMapRef:
-              name: "{{ include "service.name" . }}-configmap-env-base"
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: {{ .Values.service.healthPath }}
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 0
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 10
+              path: /api/v1/health
+              port: http
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: {{ .Values.service.healthPath }}
+              path: /api/v1/health
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 0
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 10
-          resources:
-            {}
   strategy:
     canary:
       dynamicStableScale: true

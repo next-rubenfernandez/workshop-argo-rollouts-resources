@@ -1,5 +1,5 @@
 service:
-  name: dstrategies-back
+  name: film-storage
   image:
     repository: quay.io/dborrego/film-storage
     version: no-default-value
