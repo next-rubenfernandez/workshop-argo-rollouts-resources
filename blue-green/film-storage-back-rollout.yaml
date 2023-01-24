@@ -14,7 +14,7 @@ spec:
       autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
-          - templateName: dstrategies-back-analysis-template
+          - templateName: film-storage-analysis-template
       previewService: <SERVICE_OFFLINE>
   template:
     metadata:
