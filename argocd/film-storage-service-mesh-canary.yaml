@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: film-storage-service-mesh-canary
-  namespace: <OCP_USER>-gitops-argocd
+  namespace: user15-gitops-argocd
 spec:
   destination:
-    namespace: <OCP_USER>-canary-service-mesh
+    namespace: user15-canary-service-mesh
     server: 'https://kubernetes.default.svc'
   source:
     path: rhsm-canary
-    repoURL: https://github.com/<GITHUB_USER>/workshop-argo-rollouts-resources
+    repoURL: https://github.com/next-rubenfernandez/workshop-argo-rollouts-resources
     targetRevision: HEAD
     helm:
       valueFiles:
