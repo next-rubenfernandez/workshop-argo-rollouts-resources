@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: {{ include "service.name" . }}-analysis-template
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+spec:
+  metrics:
+  - name: {{ include "service.name" . }}-webmetric
+    provider:
+      web:
+        jsonPath: '{$.status}'
+        url: >-
+          http://{{ include "service.name" . }}.{{ .Values.user }}-blue-green.svc.cluster.local/api/v1/health
+    successCondition: result == 'UP'

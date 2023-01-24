@@ -1,10 +1,8 @@
 service:
   name: dstrategies-back
   image:
-    repository: quay.io/dseveria/dstrategies-back
+    repository: quay.io/dborrego/film-storage
     version: no-default-value
   replicas: 4
-  port: 8080
-  healthPath: /q/health/live
 
 domain: no-default-value
