@@ -1,4 +1,4 @@
 service:
   image:
     version: 0.2
-domain: <OCP_APPS_DOMAIN>
+domain: cluster-54skn.54skn.sandbox2264.opentlc.com
